@@ -746,6 +746,7 @@ function create_table_company($db)
   `COMPANY_CURRENCY_SYMBOL` varchar(30) default NULL,
   `COMPANY_CURRENCY_CODE` varchar(30) default NULL,
   `COMPANY_DATE_FORMAT` varchar(10) default NULL,
+  `COMPANY_LOGO` varchar(60) NOT NULL default '',
   PRIMARY KEY  (`COMPANY_NAME`)
 ) ENGINE=MyISAM;";
 
