@@ -72,14 +72,14 @@ echo ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http:/
 		require("../include/ADODB/adodb.inc.php");
 		
 		/* Create ADODB Connection */
-		$db = &ADONewConnection('mysql');
+		$db = &ADONewConnection('mysqli');
 
-		$db->Connect($_POST['db_host'] ,$_POST['db_user'], $_POST['db_password']);
+		$db->Connect($_POST['db_host'] ,$_POST['db_user'], $_POST['db_password'],'');
+
 		if( $db->errorMsg() != '' ) {
 			echo "There was an error connecting to the database: ".$db->errorMsg();
 			die;
-		}
-//
+        }  
 //OBSOLETE CODE - REMOVED BY GEEVPC ON THE 21/7/11
 //##################################
 //# Create Database						#
@@ -97,7 +97,8 @@ echo ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http:/
 //						<td><font color=\"green\"><b>OK</b></font></td>\n
 //					</tr>\n");
 //		}
-//
+//        
+    
 ##################################
 # Create New Connection				#
 ##################################
@@ -108,6 +109,8 @@ echo ("<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01 Transitional//EN\" \"http:/
 			echo "There Was an error connecting to the database: ".$db->errorMsg();
 			die;
 		}
+                
+        
 
 	$prefix = $_POST['db_prefix'];
 @define('PRFX', $prefix);
@@ -1328,7 +1331,7 @@ global \$smarty;
 \$strKey = 'kcmp7n2permbtr0dqebme6mpejhn3ki';
 
 /* create adodb database connection */
-\$db = &ADONewConnection('mysql');
+\$db = &ADONewConnection('mysqli');
 \$db->Connect(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
 
