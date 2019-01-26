@@ -44,18 +44,19 @@ class Auth {
     }
 
     // Escape the variables for the query
-    $login 		= mysql_real_escape_string($_POST[USER_LOGIN_VAR]);
-    $password 	= mysql_real_escape_string($password);
+    $login 		= mysqli_real_escape_string($_POST[USER_LOGIN_VAR]);
+    $password 	= mysqli_real_escape_string($password);
   
     // Query to count number of users with this combination
     $sql = "SELECT COUNT(*) AS num_users FROM ".PRFX."TABLE_EMPLOYEE WHERE EMPLOYEE_STATUS = '1' AND EMPLOYEE_LOGIN=".$this->db->qstr($login) ." AND EMPLOYEE_PASSWD=".$this->db->qstr($password);
-	 $result = $this->db->Execute($sql);
+    $result = $this->db->Execute($sql);
     $row = $result->FetchRow();
-
+    $this->writeLog('row(usrs)', $row['num_users']);
+    
     // If there isn't is exactly one entry, redirect
     if ($row['num_users'] != 1) {    
-      $this->writeLog('Failed Login',$login);
-      $this->force_page('login.php?error_msg=Login Failed');
+    $this->writeLog('Failed Login',$login);        
+    $this->force_page('login.php?error_msg=Login Failed');
     // Else is a valid user; set the session variables
     } else {
 		/* grab their login ID for tracking purposes */
@@ -161,4 +162,5 @@ function force_page($module, $cur_page) {
 			//-->
 		</script>");
 }
+
 ?>
